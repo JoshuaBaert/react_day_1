@@ -12,7 +12,6 @@ var App = React.createClass({
 				{name: 'Gustav'},
 				{name: 'Josh'},
 				{name: 'Elisha'},
-			
 			],
 		}
 	},

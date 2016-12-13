@@ -54,47 +54,54 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _child = __webpack_require__(178);
+	
+	var _child2 = _interopRequireDefault(_child);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	/**
-	 * Created by Joshua Baert on 12/12/2016.
-	 */
-	// Display list of friends
-	// Show "active" friend's info
-	// Be able to switch between friends
-	
-	var Mini = _react2.default.createClass({
-		displayName: 'Mini',
+	var Parent = _react2.default.createClass({
+		displayName: 'Parent',
 		getInitialState: function getInitialState() {
 			return {
-				name: 'Me',
-				friends: [{ name: 'James', email: 'james@something.com' }, { name: 'Geoff', email: 'Geoff@some.io' }, { name: 'Sammy', email: 'Hello@james.com' }, { name: 'Leroy', email: 'jenkins@yep.io' }, { name: 'Fred', email: 'whynot@whoknows.com' }]
+				name: 'Wesley',
+				sendName: 'Daniel'
 			};
 		},
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
 				null,
-				this.state.friends.map(function (ele, i) {
-					return _react2.default.createElement(
-						'div',
-						{ key: ele.name },
-						ele.name,
-						' ',
-						_react2.default.createElement(
-							'span',
-							null,
-							' ',
-							ele.email,
-							' '
-						)
-					);
-				})
+				_react2.default.createElement(_child2.default, {
+					changeName: this.changeName.bind(this),
+					sendName: this.state.sendName }),
+				' ',
+				_react2.default.createElement('br', null),
+				_react2.default.createElement('hr', null),
+				this.state.name,
+				' ',
+				_react2.default.createElement('br', null),
+				'Parent Input ',
+				_react2.default.createElement('input', { type: 'text', onKeyDown: this.keyDownhandler })
 			);
+		},
+		keyDownhandler: function keyDownhandler(event) {
+			if (event.keyCode === 13) {
+				this.setState({
+					sendName: event.target.value
+				});
+			}
+		},
+		changeName: function changeName(name) {
+			this.setState({
+				name: name
+			});
 		}
-	});
+	}); /**
+	     * Created by Joshua Baert on 12/13/2016.
+	     */
 	
-	_reactDom2.default.render(_react2.default.createElement(Mini, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(Parent, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21502,6 +21509,43 @@
 	
 	module.exports = __webpack_require__(87);
 
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(177);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+		displayName: "child.component",
+		render: function render() {
+			return _react2.default.createElement(
+				"div",
+				null,
+				"Child Input ",
+				_react2.default.createElement("input", { type: "text", onKeyDown: this.keyDownhandler }),
+				_react2.default.createElement("br", null),
+				this.props.sendName
+			);
+		},
+		keyDownhandler: function keyDownhandler(event) {
+			if (event.keyCode === 13) {
+				this.props.changeName(event.target.value);
+			}
+		}
+	}); /**
+	     * Created by Joshua Baert on 12/13/2016.
+	     */
 
 /***/ }
 /******/ ]);
